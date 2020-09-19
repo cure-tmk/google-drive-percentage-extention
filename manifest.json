@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "description": "Displays download percentage when downloading files in Google Drive",
   "content_scripts": [{
-    "css": ["index.css"],
     "js": ["dist/index.js"],
+    "run_at": "document_start",
     "matches": ["*://drive.google.com/drive/*"]
   }]
 }

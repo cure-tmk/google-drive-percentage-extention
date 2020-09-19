@@ -12,7 +12,6 @@
     "moduleResolution": "node",
     "noUnusedParameters": true,
     "removeComments": false,
-    "sourceMap": true,
     "strictNullChecks": true,
     "target": "ES2017",
     "experimentalDecorators": true,

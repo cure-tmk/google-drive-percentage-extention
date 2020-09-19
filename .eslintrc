@@ -29,6 +29,10 @@
         }
       }
     ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
     "@typescript-eslint/no-unused-expressions": [
       "error",
       {
@@ -41,5 +45,5 @@
       }
     ],
     "no-shadow": "error"
-  }
+  },
 }
