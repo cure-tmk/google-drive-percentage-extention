@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "Modify CSS and HTML",
+  "version": "0.0.1",
+  "description": "Displays download percentage when downloading files in Google Drive",
+  "content_scripts": [{
+    "css": ["index.css"],
+    "js": ["dist/index.js"],
+    "matches": ["*://drive.google.com/drive/*"]
+  }]
+}
