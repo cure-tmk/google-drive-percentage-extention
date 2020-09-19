@@ -1,3 +1,6 @@
 # Google Drive Percentage Extention
 
-Chrome extention to show download percentage when downloading files in Google Drive
+An install-and-forget extention to display zipping progress in percentages, when downloading stuff from Google Drive.
+
+![demo](./assets/demo.jpg)
+

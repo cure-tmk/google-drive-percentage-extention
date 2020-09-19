@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Google Drive Percentage",
   "version": "0.0.1",
-  "description": "Displays download percentage when downloading files in Google Drive",
+  "description": "Displays zipping progress in percentage when downloading stuff from Google Drive",
   "content_scripts": [{
     "js": ["dist/index.js"],
     "run_at": "document_start",
