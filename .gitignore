@@ -1,6 +1,8 @@
 # project
 node_modules/
 dist/
+tmp/
+package.zip
 
 # logs
 **/*.log

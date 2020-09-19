@@ -24,7 +24,10 @@
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "build": "esbuild --minify --bundle --outdir=dist src/index.ts",
+    "cleanup": "rm -rf dist .eslintcache",
+    "esbuild": "esbuild --minify --bundle --outdir=dist src/index.ts",
+    "build:zip": "sh ./bin/zip.sh",
+    "build": "run-s cleanup lint esbuild build:zip",
     "lint": "run-p lint:tsc lint:eslint",
     "lint:tsc": "tsc --noEmit",
     "lint:eslint": "eslint --ext .ts,.tsx,.js --cache src"
