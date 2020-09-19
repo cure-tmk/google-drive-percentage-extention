@@ -3,6 +3,10 @@
   "name": "Google Drive Percentage",
   "version": "0.0.1",
   "description": "Displays zipping progress in percentage when downloading stuff from Google Drive",
+  "icons": {
+    "128": "assets/icon128.png",
+    "48": "assets/icon48.png"
+  },
   "content_scripts": [{
     "js": ["dist/index.js"],
     "run_at": "document_start",
