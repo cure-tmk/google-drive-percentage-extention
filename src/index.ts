@@ -1,11 +1,13 @@
 import isEqual from 'lodash/isEqual';
 
+import Progress from './progress';
+
 const PROGRESS_INDICATOR_SELECTOR =
   'div[data-progress][aria-valuemin="0"][aria-valuemax="100"]';
 
 // global states
+let trackedProgresses: Progress[] = [];
 let progressIndicators: Element[] = [];
-let progressObservers: MutationObserver[] = [];
 
 const renderProgress = (percentage: number): string => {
   const size = 40;
@@ -50,35 +52,25 @@ const renderProgress = (percentage: number): string => {
   `;
 };
 
-const handleMutation: MutationCallback = (mutations) => {
-  const current = mutations[mutations.length - 1]?.target as
-    | HTMLElement
-    | undefined;
-  if (current === undefined) {
-    return;
-  }
-  // @ts-ignore aria-valuenow is not on type Node
-  const ariaValueNow = current.ariaValueNow as number | undefined;
-  const percentage = ariaValueNow !== undefined ? ariaValueNow : 0;
-  current.innerHTML = renderProgress(percentage);
-  current.style.animation = 'none'; // prevent spinning
-  current.style.position = 'relative';
-};
-
-const attachEventHandlers = (elements: Element[]) => {
-  if (elements.length === 0) {
-    return;
-  }
-  progressObservers = elements.map((e) => {
-    const Observer = new MutationObserver(handleMutation);
-    Observer.observe(e, {
+const observeProcessElement = (element: Element): Progress => {
+  const progress = new Progress(element);
+  progress.observe(
+    (percentage, current) => {
+      if (percentage === null) {
+        return;
+      }
+      current.innerHTML = renderProgress(percentage);
+      current.style.animation = 'none'; // prevent spinning
+      current.style.position = 'relative';
+    },
+    {
       childList: false,
       subtree: false,
       attributes: true,
       characterData: false,
-    });
-    return Observer;
-  });
+    }
+  );
+  return progress;
 };
 
 const run = () => {
@@ -90,8 +82,12 @@ const run = () => {
     if (isEqual(progressIndicators, elements)) {
       return;
     }
+    // cleanup previous
+    trackedProgresses.forEach((p) => p.unobserve());
+
+    // set states
     progressIndicators = elements;
-    attachEventHandlers(elements);
+    trackedProgresses = elements.map((e) => observeProcessElement(e));
   });
   bodyObserver.observe(document.body, {
     childList: true,
@@ -103,9 +99,7 @@ const run = () => {
   // cleanup
   window.onbeforeunload = () => {
     bodyObserver.disconnect();
-    progressObservers.forEach((mo) => {
-      mo.disconnect();
-    });
+    trackedProgresses.forEach((p) => p.unobserve());
   };
 };
 
