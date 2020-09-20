@@ -17,7 +17,7 @@ const renderProgress = (percentage: number): string => {
   const offset = circum - (percentage / 100) * circum;
   return `
   <svg
-    style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:${size}; height: ${size};"
+    style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:${size}px; height: ${size}px;"
     height="${size}"
     width="${size}"
   >
