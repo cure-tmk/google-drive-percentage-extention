@@ -7,7 +7,7 @@ An install-and-forget extention to display zipping progress in percentages, when
 ## Installation
 
 - Google Chrome Extention (Pending..)
-- Mozilla Firefox Addon (Pending..)
+- [Mozilla Firefox Addon](https://addons.mozilla.org/en-US/firefox/addon/google-drive-percentage/)
 
 ## Developing
 
